@@ -14,8 +14,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314201f'/%3E%3Cpath d='M7 20c3-2 6-2 9 0s6 2 9 0' stroke='%23e9915a' stroke-width='2' fill='none'/%3E%3Cpath d='M7 14c3-2 6-2 9 0s6 2 9 0' stroke='%23f3efe4' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
   <!-- build:preload -->
-  <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/images/opt/package-a-p-540.avif 540w, assets/images/opt/package-a-p-828.avif 828w, assets/images/opt/package-a-p-1080.avif 1080w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preload" as="image" type="image/avif" media="(orientation: landscape)" imagesrcset="assets/images/opt/package-a-960.avif 960w, assets/images/opt/package-a-1440.avif 1440w, assets/images/opt/package-a-1920.avif 1920w, assets/images/opt/package-a-2560.avif 2560w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/images/opt/elevation-a-p-540.avif 540w, assets/images/opt/elevation-a-p-828.avif 828w, assets/images/opt/elevation-a-p-1080.avif 1080w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: landscape)" imagesrcset="assets/images/opt/elevation-a-960.avif 960w, assets/images/opt/elevation-a-1440.avif 1440w, assets/images/opt/elevation-a-1920.avif 1920w, assets/images/opt/elevation-a-2560.avif 2560w" imagesizes="100vw" fetchpriority="high">
   <!-- /build:preload -->
   <script>document.documentElement.className = 'js';</script>
   <style>
@@ -224,6 +224,29 @@
       .gallery__item--tall { grid-column: span 4; }
     }
 
+    /* Floor plans */
+    .plans__head { display: grid; gap: 8px 64px; margin-bottom: 48px; }
+    @media (min-width: 900px) { .plans__head { grid-template-columns: 1fr 1fr; align-items: end; } }
+    .plans__note { max-width: 46ch; margin: 0; }
+    .plans { display: grid; gap: 20px; }
+    @media (min-width: 760px) { .plans { grid-template-columns: 1fr 1fr; } }
+    .plan { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+    .plan__img { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 10; background: #f1eee3; border-bottom: 1px solid var(--line); text-decoration: none; }
+    .plan__img picture, .plan__img img { width: 100%; height: 100%; }
+    .plan__img img { object-fit: contain; padding: 8px; }
+    .plan__zoom { position: absolute; right: 10px; bottom: 10px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: rgba(243, 239, 228, .92); padding: 5px 10px; border-radius: 999px; color: var(--muted); }
+    .plan__img--none { gap: 14px; padding: 24px; text-align: center; color: var(--muted); font-size: 15px; align-content: center; }
+    .plan__img--none p { margin: 0; max-width: 26ch; }
+    .plan__body { padding: 22px 22px 24px; display: grid; gap: 10px; }
+    .plan__type { margin: 0; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; }
+    .plan h3 { font-size: 34px; }
+    .plan__specs { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 4px 28px; margin: 4px 0 0; }
+    .plan__specs div { display: grid; gap: 2px; }
+    .plan__specs dt { font-size: 12px; color: var(--muted); }
+    .plan__specs dd { margin: 0; font-size: 17px; font-variant-numeric: tabular-nums; }
+    .plan__features { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+    @media (max-width: 420px) { .plan__specs { grid-template-columns: repeat(2, auto); } }
+
     /* Courtyard */
     .court__grid { display: grid; gap: 40px; }
     @media (min-width: 900px) { .court__grid { grid-template-columns: 4fr 7fr; gap: 72px; align-items: center; } }
@@ -391,6 +414,7 @@
         <div class="header__links">
           <a href="#about">Lakeview Village</a>
           <a href="#gallery">Gallery</a>
+          <a href="#plans">Floor plans</a>
           <a href="#location">Location</a>
           <a href="#faq">FAQ</a>
         </div>
@@ -404,11 +428,29 @@
       <div class="hero__slides" aria-live="off"><!-- build:hero -->
         <div class="hero__slide is-active" data-slide>
           <picture>
-            <source type="image/avif" media="(orientation: portrait)" srcset="assets/images/opt/package-a-p-540.avif 540w, assets/images/opt/package-a-p-828.avif 828w, assets/images/opt/package-a-p-1080.avif 1080w" sizes="100vw">
-            <source type="image/webp" media="(orientation: portrait)" srcset="assets/images/opt/package-a-p-540.webp 540w, assets/images/opt/package-a-p-828.webp 828w, assets/images/opt/package-a-p-1080.webp 1080w" sizes="100vw">
-            <source type="image/avif" srcset="assets/images/opt/package-a-960.avif 960w, assets/images/opt/package-a-1440.avif 1440w, assets/images/opt/package-a-1920.avif 1920w, assets/images/opt/package-a-2560.avif 2560w" sizes="100vw">
-            <source type="image/webp" srcset="assets/images/opt/package-a-960.webp 960w, assets/images/opt/package-a-1440.webp 1440w, assets/images/opt/package-a-1920.webp 1920w, assets/images/opt/package-a-2560.webp 2560w" sizes="100vw">
-            <img src="assets/images/opt/package-a-1440.webp" alt="Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island" width="1440" height="960" fetchpriority="high" decoding="async">
+            <source type="image/avif" media="(orientation: portrait)" srcset="assets/images/opt/elevation-a-p-540.avif 540w, assets/images/opt/elevation-a-p-828.avif 828w, assets/images/opt/elevation-a-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" srcset="assets/images/opt/elevation-a-p-540.webp 540w, assets/images/opt/elevation-a-p-828.webp 828w, assets/images/opt/elevation-a-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" srcset="assets/images/opt/elevation-a-960.avif 960w, assets/images/opt/elevation-a-1440.avif 1440w, assets/images/opt/elevation-a-1920.avif 1920w, assets/images/opt/elevation-a-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" srcset="assets/images/opt/elevation-a-960.webp 960w, assets/images/opt/elevation-a-1440.webp 1440w, assets/images/opt/elevation-a-1920.webp 1920w, assets/images/opt/elevation-a-2560.webp 2560w" sizes="100vw">
+            <img src="assets/images/opt/elevation-a-1440.webp" alt="Rendering of South Banks townhomes in Elevation A: three storeys of brick and stone with gabled roofs and black balconies" width="1440" height="855" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__slide" data-slide aria-hidden="true">
+          <picture>
+            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/package-a-p-540.avif 540w, assets/images/opt/package-a-p-828.avif 828w, assets/images/opt/package-a-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/package-a-p-540.webp 540w, assets/images/opt/package-a-p-828.webp 828w, assets/images/opt/package-a-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" data-srcset="assets/images/opt/package-a-960.avif 960w, assets/images/opt/package-a-1440.avif 1440w, assets/images/opt/package-a-1920.avif 1920w, assets/images/opt/package-a-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" data-srcset="assets/images/opt/package-a-960.webp 960w, assets/images/opt/package-a-1440.webp 1440w, assets/images/opt/package-a-1920.webp 1920w, assets/images/opt/package-a-2560.webp 2560w" sizes="100vw">
+            <img data-src="assets/images/opt/package-a-1440.webp" alt="Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island" width="1440" height="960" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__slide" data-slide aria-hidden="true">
+          <picture>
+            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/elevation-c-p-540.avif 540w, assets/images/opt/elevation-c-p-828.avif 828w, assets/images/opt/elevation-c-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/elevation-c-p-540.webp 540w, assets/images/opt/elevation-c-p-828.webp 828w, assets/images/opt/elevation-c-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" data-srcset="assets/images/opt/elevation-c-960.avif 960w, assets/images/opt/elevation-c-1440.avif 1440w, assets/images/opt/elevation-c-1920.avif 1920w, assets/images/opt/elevation-c-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" data-srcset="assets/images/opt/elevation-c-960.webp 960w, assets/images/opt/elevation-c-1440.webp 1440w, assets/images/opt/elevation-c-1920.webp 1920w, assets/images/opt/elevation-c-2560.webp 2560w" sizes="100vw">
+            <img data-src="assets/images/opt/elevation-c-1440.webp" alt="Rendering of South Banks townhomes in Elevation C: light stone facades with rooftop terraces" width="1440" height="872" loading="lazy" decoding="async">
           </picture>
         </div>
         <div class="hero__slide" data-slide aria-hidden="true">
@@ -436,15 +478,6 @@
             <source type="image/avif" data-srcset="assets/images/opt/masterplan-960.avif 960w, assets/images/opt/masterplan-1440.avif 1440w, assets/images/opt/masterplan-1746.avif 1746w" sizes="100vw">
             <source type="image/webp" data-srcset="assets/images/opt/masterplan-960.webp 960w, assets/images/opt/masterplan-1440.webp 1440w, assets/images/opt/masterplan-1746.webp 1746w" sizes="100vw">
             <img data-src="assets/images/opt/masterplan-1440.webp" alt="Aerial rendering of the Lakeview Village waterfront masterplan with the South Banks site marked beside Waterway Common Park" width="1440" height="793" loading="lazy" decoding="async">
-          </picture>
-        </div>
-        <div class="hero__slide" data-slide aria-hidden="true">
-          <picture>
-            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/package-b-p-540.avif 540w, assets/images/opt/package-b-p-828.avif 828w, assets/images/opt/package-b-p-1080.avif 1080w" sizes="100vw">
-            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/package-b-p-540.webp 540w, assets/images/opt/package-b-p-828.webp 828w, assets/images/opt/package-b-p-1080.webp 1080w" sizes="100vw">
-            <source type="image/avif" data-srcset="assets/images/opt/package-b-960.avif 960w, assets/images/opt/package-b-1440.avif 1440w, assets/images/opt/package-b-1920.avif 1920w, assets/images/opt/package-b-2560.avif 2560w" sizes="100vw">
-            <source type="image/webp" data-srcset="assets/images/opt/package-b-960.webp 960w, assets/images/opt/package-b-1440.webp 1440w, assets/images/opt/package-b-1920.webp 1920w, assets/images/opt/package-b-2560.webp 2560w" sizes="100vw">
-            <img data-src="assets/images/opt/package-b-1440.webp" alt="Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets" width="1440" height="960" loading="lazy" decoding="async">
           </picture>
         </div>
       <!-- /build:hero -->
@@ -505,6 +538,24 @@
         <a class="btn btn--outline-light btn--small reveal" href="#register">Get Phase 2 floor plans</a>
       </div>
       <div class="gallery__track"><!-- build:gallery -->
+          <figure class="gallery__item reveal">
+            <a href="assets/images/opt/elevation-a-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of South Banks townhomes in Elevation A: three storeys of brick and stone with gabled roofs and black balconies">
+              <picture class="parallax">
+                <source type="image/avif" srcset="assets/images/opt/elevation-a-g-640.avif 640w, assets/images/opt/elevation-a-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
+                <img src="assets/images/opt/elevation-a-g-640.webp" srcset="assets/images/opt/elevation-a-g-640.webp 640w, assets/images/opt/elevation-a-g-1280.webp 1280w" sizes="(min-width: 900px) 60vw, 86vw" alt="Rendering of South Banks townhomes in Elevation A: three storeys of brick and stone with gabled roofs and black balconies" width="640" height="380" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <figcaption>Elevation A</figcaption>
+          </figure>
+          <figure class="gallery__item reveal">
+            <a href="assets/images/opt/elevation-c-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of South Banks townhomes in Elevation C: light stone facades with rooftop terraces">
+              <picture class="parallax">
+                <source type="image/avif" srcset="assets/images/opt/elevation-c-g-640.avif 640w, assets/images/opt/elevation-c-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
+                <img src="assets/images/opt/elevation-c-g-640.webp" srcset="assets/images/opt/elevation-c-g-640.webp 640w, assets/images/opt/elevation-c-g-1280.webp 1280w" sizes="(min-width: 900px) 60vw, 86vw" alt="Rendering of South Banks townhomes in Elevation C: light stone facades with rooftop terraces" width="640" height="388" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <figcaption>Elevation C</figcaption>
+          </figure>
           <figure class="gallery__item gallery__item--tall reveal">
             <a href="assets/images/opt/package-a-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island">
               <picture class="parallax">
@@ -543,6 +594,132 @@
       <!-- /build:gallery -->
       </div>
       <div class="wrap"><p class="source" style="color:rgba(243,239,228,.55)">Renderings are artist's concepts and may differ from the finished homes.</p></div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="wrap">
+        <div class="plans__head">
+          <div>
+            <p class="eyebrow reveal">Floor plans</p>
+            <h2 class="h2"><span class="reveal-line reveal"><span>Six townhome models</span></span></h2>
+          </div>
+          <p class="muted reveal plans__note">These are the Phase 1 models: one-storey homes and two-plus-storey homes, some with private rooftop terraces. All homes are above grade. Phase 2 plans haven't been released yet and may differ.</p>
+        </div>
+        <div class="plans">
+          <article class="plan reveal">
+            <div class="plan__img plan__img--none">
+              <p>The Azure floor plan is sent to registrants.</p>
+              <a class="btn btn--ghost btn--small" href="#register">Get the Azure plan</a>
+            </div>
+            <div class="plan__body">
+              <p class="plan__type">1-storey</p>
+              <h3>Azure</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>2</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>931 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>83 sf</dd></div>
+              </dl>
+              <p class="plan__features">Large terrace · Walk-in pantry · Walk-in closet · End unit available</p>
+            </div>
+          </article>
+          <article class="plan reveal">
+            <div class="plan__img plan__img--none">
+              <p>The Breeze floor plan is sent to registrants.</p>
+              <a class="btn btn--ghost btn--small" href="#register">Get the Breeze plan</a>
+            </div>
+            <div class="plan__body">
+              <p class="plan__type">1-storey end unit</p>
+              <h3>Breeze</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>3</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>997 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>72 sf</dd></div>
+              </dl>
+              <p class="plan__features">Two balconies · Open-concept living · Ensuite bathroom</p>
+            </div>
+          </article>
+          <article class="plan reveal">
+            <a class="plan__img" href="assets/images/opt/plan-coast-1800.webp" data-lightbox aria-label="Open the Coast floor plan larger">
+              <picture>
+                <source type="image/avif" srcset="assets/images/opt/plan-coast-900.avif 900w, assets/images/opt/plan-coast-1800.avif 1800w" sizes="(min-width: 1000px) 560px, 92vw">
+                <img src="assets/images/opt/plan-coast-900.webp" srcset="assets/images/opt/plan-coast-900.webp 900w, assets/images/opt/plan-coast-1800.webp 1800w" sizes="(min-width: 1000px) 560px, 92vw" width="900" height="575" loading="lazy" decoding="async" alt="Coast floor plan with room dimensions for each level">
+              </picture>
+              <span class="plan__zoom">Tap to enlarge</span>
+            </a>
+            <div class="plan__body">
+              <p class="plan__type">2+ storey</p>
+              <h3>Coast</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>2 or 3</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>1,179 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>80 sf</dd></div>
+              </dl>
+              <p class="plan__features">Two balconies · Spacious primary with ensuite · Laundry room · End unit available</p>
+            </div>
+          </article>
+          <article class="plan reveal">
+            <div class="plan__img plan__img--none">
+              <p>The Drift floor plan is sent to registrants.</p>
+              <a class="btn btn--ghost btn--small" href="#register">Get the Drift plan</a>
+            </div>
+            <div class="plan__body">
+              <p class="plan__type">2+ storey end unit</p>
+              <h3>Drift</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>3 or 4</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>1,252 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>36 sf</dd></div>
+              </dl>
+              <p class="plan__features">Main-level balcony · Large main-level living · Optional fourth bedroom</p>
+            </div>
+          </article>
+          <article class="plan reveal">
+            <a class="plan__img" href="assets/images/opt/plan-coast-rt-1800.webp" data-lightbox aria-label="Open the Coast Rooftop Terrace floor plan larger">
+              <picture>
+                <source type="image/avif" srcset="assets/images/opt/plan-coast-rt-900.avif 900w, assets/images/opt/plan-coast-rt-1800.avif 1800w" sizes="(min-width: 1000px) 560px, 92vw">
+                <img src="assets/images/opt/plan-coast-rt-900.webp" srcset="assets/images/opt/plan-coast-rt-900.webp 900w, assets/images/opt/plan-coast-rt-1800.webp 1800w" sizes="(min-width: 1000px) 560px, 92vw" width="900" height="510" loading="lazy" decoding="async" alt="Coast Rooftop Terrace floor plan with room dimensions for each level">
+              </picture>
+              <span class="plan__zoom">Tap to enlarge</span>
+            </a>
+            <div class="plan__body">
+              <p class="plan__type">2+ storey with rooftop terrace</p>
+              <h3>Coast Rooftop Terrace</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>2 or 3</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>1,385 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>392 sf</dd></div>
+              </dl>
+              <p class="plan__features">Large private rooftop terrace · Walk-in pantry · Two balconies · End unit available</p>
+            </div>
+          </article>
+          <article class="plan reveal">
+            <a class="plan__img" href="assets/images/opt/plan-drift-rt-1800.webp" data-lightbox aria-label="Open the Drift Rooftop Terrace floor plan larger">
+              <picture>
+                <source type="image/avif" srcset="assets/images/opt/plan-drift-rt-900.avif 900w, assets/images/opt/plan-drift-rt-1800.avif 1800w" sizes="(min-width: 1000px) 560px, 92vw">
+                <img src="assets/images/opt/plan-drift-rt-900.webp" srcset="assets/images/opt/plan-drift-rt-900.webp 900w, assets/images/opt/plan-drift-rt-1800.webp 1800w" sizes="(min-width: 1000px) 560px, 92vw" width="900" height="555" loading="lazy" decoding="async" alt="Drift Rooftop Terrace floor plan with room dimensions for each level">
+              </picture>
+              <span class="plan__zoom">Tap to enlarge</span>
+            </a>
+            <div class="plan__body">
+              <p class="plan__type">2+ storey end unit with rooftop terrace</p>
+              <h3>Drift Rooftop Terrace</h3>
+              <dl class="plan__specs">
+                <div><dt>Bedrooms</dt><dd>3 or 4</dd></div>
+                <div><dt>Bathrooms</dt><dd>2</dd></div>
+                <div><dt>Indoor</dt><dd>1,463 sf</dd></div>
+                <div><dt>Outdoor</dt><dd>340 sf</dd></div>
+              </dl>
+              <p class="plan__features">Large private rooftop terrace · Main-level balcony · Optional fourth bedroom</p>
+            </div>
+          </article>
+        </div>
+        <p class="source">Plans and areas are provided by the builder, are approximate and subject to change without notice. Actual usable floor space may vary from the stated floor area. Furniture is for illustration only. E.&amp;O.E.</p>
+      </div>
     </section>
 
     <section class="section section--tint" id="courtyard">
@@ -662,6 +839,17 @@
                 <label for="f-phone">Phone</label>
                 <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
               </div>
+            </div>
+            <div class="field">
+              <label for="f-budget">Budget</label>
+              <select id="f-budget" name="budget" required>
+                <option value="" selected disabled>Select a price range</option>
+                <option>$550K – $600K</option>
+                <option>$600K – $650K</option>
+                <option>$650K – $700K</option>
+                <option>$700K – $750K</option>
+                <option>$750K+</option>
+              </select>
             </div>
             <fieldset class="field">
               <legend>I'm interested as</legend>

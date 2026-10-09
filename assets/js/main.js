@@ -242,6 +242,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
       [f.name, f.name.value.trim().length > 1, 'Please enter your name.'],
       [f.email, emailOk(f.email.value.trim()), 'Please enter a valid email address.'],
       [f.phone, phoneOk(f.phone.value), 'Please enter a phone number with area code.'],
+      [f.budget, Boolean(f.budget.value), 'Please choose a budget range.'],
       [f.consent, f.consent.checked, 'Please tick the consent box so we can send you Phase 2 details.'],
     ];
     checks.forEach(([el, ok]) => el.setAttribute('aria-invalid', String(!ok)));
@@ -265,6 +266,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
       Name: f.name.value.trim(),
       email: f.email.value.trim(),
       Phone: f.phone.value.trim(),
+      Budget: f.budget.value,
       'Interested as': f.intent.value,
       'Working with a realtor': f.realtor.value,
       'Ad source': f.source.value,

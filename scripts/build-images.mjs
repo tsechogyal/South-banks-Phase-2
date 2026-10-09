@@ -23,10 +23,12 @@ const INDEX = join(ROOT, 'index.html');
 const IMAGES = [
   { key: 'street-view', file: 'South Banks Street View.png', hero: true, gallery: 'wide', focus: 0.5,
     alt: 'Rendering of South Banks homes seen from the street' },
+  { key: 'elevation-a', caption: 'Elevation A', file: 'South Banks Exterior - Elevation A.jpg', hero: true, gallery: true, focus: 0.42,
+    alt: 'Rendering of South Banks townhomes in Elevation A: three storeys of brick and stone with gabled roofs and black balconies' },
   { key: 'package-a', caption: 'Kitchen, Package A', file: 'South Banks Package A - with people.jpg', hero: true, gallery: true, focus: 0.55, focusY: 0.62,
     alt: 'Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island' },
-  { key: 'elevation-a', file: 'South Banks Exterior - Elevation A.png', hero: true, gallery: true, focus: 0.5,
-    alt: 'South Banks exterior rendering, Elevation A' },
+  { key: 'elevation-c', caption: 'Elevation C', file: 'South Banks Exterior - Elevation C.jpg', hero: true, gallery: true, focus: 0.45,
+    alt: 'Rendering of South Banks townhomes in Elevation C: light stone facades with rooftop terraces' },
   { key: 'shoreline', file: 'Shoreline Aerial.jpg', hero: true, gallery: false, focus: 0.5,
     alt: 'Aerial view of a sandy beach and shallow green lake water' },
   { key: 'package-c', caption: 'Kitchen, Package C', file: 'South Banks Package C - with people.jpg', hero: true, gallery: true, focus: 0.3, focusY: 0.6,
@@ -37,8 +39,6 @@ const IMAGES = [
     alt: 'Aerial rendering of the Lakeview Village waterfront masterplan with the South Banks site marked beside Waterway Common Park' },
   { key: 'package-b', caption: 'Kitchen, Package B', file: 'South Banks Package B - with people.jpg', hero: true, gallery: true, focus: 0.45, focusY: 0.62,
     alt: 'Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets' },
-  { key: 'elevation-c', file: 'South Banks Exterior - Elevation C.png', hero: true, gallery: true, focus: 0.5,
-    alt: 'South Banks exterior rendering, Elevation C' },
 ];
 
 // Gallery order differs from the hero: site context first, then the homes.
@@ -46,7 +46,13 @@ const GALLERY_ORDER = ['street-view', 'elevation-a', 'elevation-c', 'rooftop', '
 const MAX_HERO = 6;
 
 // Plain responsive images used directly in index.html (no generated markup).
-const PLAIN = [{ key: 'amenity-plan', file: 'South Banks Amenity Plan.jpg', widths: [900, 1800] }];
+const PLAIN = [
+  { key: 'amenity-plan', file: 'South Banks Amenity Plan.jpg', widths: [900, 1800] },
+  // Floor plans, rendered from page 2 of each model's PDF at 220 dpi.
+  { key: 'plan-coast', file: 'Plan - coast.png', widths: [900, 1800] },
+  { key: 'plan-coast-rt', file: 'Plan - coast-rt.png', widths: [900, 1800] },
+  { key: 'plan-drift-rt', file: 'Plan - drift.png', widths: [900, 1800] },
+];
 
 const HERO_LANDSCAPE = [960, 1440, 1920, 2560];
 const HERO_PORTRAIT = [540, 828, 1080]; // 9:16 crops for phones
