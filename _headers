@@ -1,5 +1,11 @@
-/assets/*
+/assets/images/*
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/js/*
+  Cache-Control: public, max-age=300, must-revalidate
+
 /
-  Cache-Control: public, max-age=300
+  Cache-Control: public, max-age=0, must-revalidate
