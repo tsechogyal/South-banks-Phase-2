@@ -2,10 +2,11 @@
 //
 // Setup (about 5 minutes):
 // 1. Create a Google Sheet. Extensions > Apps Script. Paste this file in.
-// 2. Project Settings > Script properties: add NOTIFY_EMAIL = the inbox that should get new-lead alerts.
-// 3. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone.
-// 4. Copy the web app URL into FORM_ENDPOINT at the top of assets/js/main.js.
+// 2. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone.
+// 3. Copy the web app URL into FORM_ENDPOINT at the top of assets/js/main.js.
 
+// Every new registration is emailed here. A NOTIFY_EMAIL script property overrides it.
+const NOTIFY_EMAIL = 'tsechogyal@gmail.com';
 const SHEET_NAME = 'Registrations';
 const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Interested as', 'Has realtor', 'Consent', 'Source', 'Page'];
 
@@ -27,7 +28,7 @@ function doPost(e) {
     p.consent === 'yes' ? 'Yes' : 'No', p.source || '', p.page || '']);
 
   try {
-    const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+    const to = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL') || NOTIFY_EMAIL;
     if (to) {
       MailApp.sendEmail({
         to: to,
@@ -40,6 +41,9 @@ function doPost(e) {
           'Interested as: ' + (p.intent || ''),
           'Working with a realtor: ' + (p.realtor || ''),
           'Source: ' + (p.source || ''),
+          '',
+          'Reply to this email to answer the lead directly.',
+          'All registrations: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
         ].join('\n'),
       });
     }

@@ -38,7 +38,7 @@ To change the phone crop of an image, edit its `focus` value in `scripts/build-i
 
 ## Registration form
 
-1. Follow the steps at the top of `backend/apps-script.gs`.
+1. Follow the steps at the top of `backend/apps-script.gs`. Lead alerts go to tsechogyal@gmail.com.
 2. Paste the web app URL into `FORM_ENDPOINT` in `assets/js/main.js`.
 3. Submit a test registration and check the row lands in the sheet and the alert email arrives.
 
