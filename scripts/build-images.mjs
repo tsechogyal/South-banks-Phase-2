@@ -17,25 +17,41 @@ const OUT = join(ROOT, 'assets/images/opt');
 const INDEX = join(ROOT, 'index.html');
 
 // Order here = hero slideshow order. The first available entry is the LCP image.
-// focus: horizontal crop position for the portrait (phone) crop, 0 = left, 1 = right.
+// focus:  horizontal crop position for the portrait (phone) crop, 0 = left, 1 = right.
+// focusY: vertical crop position when a tall image is cropped to widescreen for desktop.
+// gallery: 'wide' spans the full gallery width; tall images are detected automatically.
 const IMAGES = [
-  { key: 'street-view', file: 'South Banks Street View.png', hero: true, gallery: true, focus: 0.5,
+  { key: 'street-view', file: 'South Banks Street View.png', hero: true, gallery: 'wide', focus: 0.5,
     alt: 'Rendering of South Banks homes seen from the street' },
+  { key: 'package-a', caption: 'Kitchen, Package A', file: 'South Banks Package A - with people.jpg', hero: true, gallery: true, focus: 0.55, focusY: 0.62,
+    alt: 'Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island' },
   { key: 'elevation-a', file: 'South Banks Exterior - Elevation A.png', hero: true, gallery: true, focus: 0.5,
     alt: 'South Banks exterior rendering, Elevation A' },
   { key: 'shoreline', file: 'Shoreline Aerial.jpg', hero: true, gallery: false, focus: 0.5,
     alt: 'Aerial view of a sandy beach and shallow green lake water' },
+  { key: 'package-c', caption: 'Kitchen, Package C', file: 'South Banks Package C - with people.jpg', hero: true, gallery: true, focus: 0.3, focusY: 0.6,
+    alt: 'Rendering of a South Banks kitchen in Package C finishes, with white cabinets and a window looking out' },
   { key: 'rooftop', file: 'South Banks Rooftop Terrace.png', hero: true, gallery: true, focus: 0.5,
     alt: 'Rendering of a South Banks rooftop terrace' },
-  { key: 'masterplan', file: 'Lakeview Village Site Plan.jpg', hero: true, gallery: true, focus: 0.32,
+  { key: 'masterplan', file: 'Lakeview Village Site Plan.jpg', hero: true, gallery: 'wide', focus: 0.32,
     alt: 'Aerial rendering of the Lakeview Village waterfront masterplan with the South Banks site marked beside Waterway Common Park' },
+  { key: 'package-b', caption: 'Kitchen, Package B', file: 'South Banks Package B - with people.jpg', hero: true, gallery: true, focus: 0.45, focusY: 0.62,
+    alt: 'Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets' },
   { key: 'elevation-c', file: 'South Banks Exterior - Elevation C.png', hero: true, gallery: true, focus: 0.5,
     alt: 'South Banks exterior rendering, Elevation C' },
 ];
 
+// Gallery order differs from the hero: site context first, then the homes.
+const GALLERY_ORDER = ['street-view', 'elevation-a', 'elevation-c', 'rooftop', 'package-a', 'package-b', 'package-c', 'masterplan'];
+const MAX_HERO = 6;
+
+// Plain responsive images used directly in index.html (no generated markup).
+const PLAIN = [{ key: 'amenity-plan', file: 'South Banks Amenity Plan.jpg', widths: [900, 1800] }];
+
 const HERO_LANDSCAPE = [960, 1440, 1920, 2560];
 const HERO_PORTRAIT = [540, 828, 1080]; // 9:16 crops for phones
 const GALLERY = [640, 1280];
+const HERO_MIN_RATIO = 1.5; // desktop hero crops are at least 3:2
 const AVIF = { quality: 50, effort: 5 };
 const WEBP = { quality: 74, effort: 5 };
 
@@ -51,13 +67,23 @@ async function encode(pipeline, base, w, h) {
   return { w, h, avif: rel(avif), webp: rel(webp) };
 }
 
-async function landscape(img, meta, base, widths) {
+// Resize to each width. With minRatio set, images taller than that ratio (w/h) are
+// first cropped to it, so a portrait rendering still fills a widescreen hero.
+async function landscape(img, meta, base, widths, { minRatio = 0, focusY = 0.5 } = {}) {
+  let src = img;
+  let { width, height } = meta;
+  if (minRatio && width / height < minRatio) {
+    const cropH = Math.round(width / minRatio);
+    const top = Math.round((height - cropH) * focusY);
+    src = img.clone().extract({ left: 0, top, width, height: cropH });
+    height = cropH;
+  }
   const out = [];
-  const list = widths.filter((w) => w <= meta.width);
-  if (!list.length || list.at(-1) < meta.width && list.length < widths.length) list.push(meta.width);
+  const list = widths.filter((w) => w <= width);
+  if (!list.length || list.at(-1) < width && list.length < widths.length) list.push(width);
   for (const w of [...new Set(list)]) {
-    const h = Math.round((meta.height / meta.width) * w);
-    out.push(await encode(img.clone().resize(w, h), base, w, h));
+    const h = Math.round((height / width) * w);
+    out.push(await encode(src.clone().resize(w, h), base, w, h));
   }
   return out;
 }
@@ -109,14 +135,16 @@ function preloads(entry) {
 function galleryItem(entry) {
   const { alt, gal } = entry;
   const big = gal.at(-1);
+  const shape = entry.gallery === 'wide' ? ' gallery__item--wide' : big.h > big.w ? ' gallery__item--tall' : '';
   return `
-          <figure class="gallery__item reveal">
+          <figure class="gallery__item${shape} reveal">
             <a href="${big.webp}" class="gallery__link" data-lightbox aria-label="Open larger image: ${alt}">
               <picture class="parallax">
                 <source type="image/avif" srcset="${srcset(gal, 'avif')}" sizes="(min-width: 900px) 60vw, 86vw">
                 <img src="${gal[0].webp}" srcset="${srcset(gal, 'webp')}" sizes="(min-width: 900px) 60vw, 86vw" alt="${alt}" width="${gal[0].w}" height="${gal[0].h}" loading="lazy" decoding="async">
               </picture>
-            </a>
+            </a>${entry.caption ? `
+            <figcaption>${entry.caption}</figcaption>` : ''}
           </figure>`;
 }
 
@@ -137,7 +165,7 @@ for (const entry of IMAGES) {
   const meta = await img.metadata();
   const built = { ...entry };
   if (entry.hero) {
-    built.land = await landscape(img, meta, entry.key, HERO_LANDSCAPE);
+    built.land = await landscape(img, meta, entry.key, HERO_LANDSCAPE, { minRatio: HERO_MIN_RATIO, focusY: entry.focusY });
     built.port = await portrait(img, meta, entry.key, entry.focus);
   }
   if (entry.gallery) built.gal = await landscape(img, meta, `${entry.key}-g`, GALLERY);
@@ -145,8 +173,16 @@ for (const entry of IMAGES) {
   ready.push(built);
 }
 
-const heroes = ready.filter((e) => e.hero);
-const gallery = ready.filter((e) => e.gallery);
+for (const { key, file, widths } of PLAIN) {
+  const path = join(SRC, file);
+  if (!existsSync(path)) continue;
+  const img = sharp(path).rotate().toColorspace('srgb');
+  await landscape(img, await img.metadata(), key, widths);
+  console.log(`built ${file}`);
+}
+
+const heroes = ready.filter((e) => e.hero).slice(0, MAX_HERO);
+const gallery = GALLERY_ORDER.map((k) => ready.find((e) => e.key === k && e.gallery)).filter(Boolean);
 if (!heroes.length) throw new Error('No hero images available');
 
 // Social share image from the first hero.

@@ -14,8 +14,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314201f'/%3E%3Cpath d='M7 20c3-2 6-2 9 0s6 2 9 0' stroke='%23e9915a' stroke-width='2' fill='none'/%3E%3Cpath d='M7 14c3-2 6-2 9 0s6 2 9 0' stroke='%23f3efe4' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
   <!-- build:preload -->
-  <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/images/opt/shoreline-p-540.avif 540w, assets/images/opt/shoreline-p-828.avif 828w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preload" as="image" type="image/avif" media="(orientation: landscape)" imagesrcset="assets/images/opt/shoreline-960.avif 960w, assets/images/opt/shoreline-1440.avif 1440w, assets/images/opt/shoreline-1920.avif 1920w, assets/images/opt/shoreline-2259.avif 2259w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/images/opt/package-a-p-540.avif 540w, assets/images/opt/package-a-p-828.avif 828w, assets/images/opt/package-a-p-1080.avif 1080w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: landscape)" imagesrcset="assets/images/opt/package-a-960.avif 960w, assets/images/opt/package-a-1440.avif 1440w, assets/images/opt/package-a-1920.avif 1920w, assets/images/opt/package-a-2560.avif 2560w" imagesizes="100vw" fetchpriority="high">
   <!-- /build:preload -->
   <script>document.documentElement.className = 'js';</script>
   <style>
@@ -205,7 +205,10 @@
       padding: 0 var(--gutter) 8px; scrollbar-width: none;
     }
     .gallery__track::-webkit-scrollbar { display: none; }
+    .gallery__track { align-items: start; }
     .gallery__item { margin: 0; scroll-snap-align: center; }
+    .gallery__item figcaption { font-size: 13px; color: rgba(243, 239, 228, .6); margin-top: 10px; }
+    .gallery__item--tall .gallery__link { aspect-ratio: 4 / 5; }
     .gallery__link { display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--deep-2); border-radius: 2px; }
     .gallery__link picture, .gallery__link img { width: 100%; height: 100%; }
     .gallery__link img { object-fit: cover; transition: transform 1.2s var(--ease); }
@@ -216,10 +219,18 @@
         overflow: visible; max-width: var(--max); margin: 0 auto;
       }
       .gallery__item { grid-column: span 6; }
-      .gallery__item:nth-child(3n + 1) { grid-column: span 12; }
-      .gallery__item:nth-child(3n + 1) .gallery__link { aspect-ratio: 16 / 8; }
-      .gallery__item:only-child { grid-column: span 12; }
+      .gallery__item--wide { grid-column: span 12; }
+      .gallery__item--wide .gallery__link { aspect-ratio: 16 / 8; }
+      .gallery__item--tall { grid-column: span 4; }
     }
+
+    /* Courtyard */
+    .court__grid { display: grid; gap: 40px; }
+    @media (min-width: 900px) { .court__grid { grid-template-columns: 4fr 7fr; gap: 72px; align-items: center; } }
+    .court__plan { margin: 0; background: #efeadc; border: 1px solid var(--line); }
+    .court__plan img { width: 100%; }
+    .court__list { list-style: none; margin: 28px 0 0; padding: 0; columns: 2; column-gap: 24px; }
+    .court__list li { break-inside: avoid; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15px; }
 
     /* Location */
     .loc__map { margin: 48px 0 0; }
@@ -393,11 +404,29 @@
       <div class="hero__slides" aria-live="off"><!-- build:hero -->
         <div class="hero__slide is-active" data-slide>
           <picture>
-            <source type="image/avif" media="(orientation: portrait)" srcset="assets/images/opt/shoreline-p-540.avif 540w, assets/images/opt/shoreline-p-828.avif 828w" sizes="100vw">
-            <source type="image/webp" media="(orientation: portrait)" srcset="assets/images/opt/shoreline-p-540.webp 540w, assets/images/opt/shoreline-p-828.webp 828w" sizes="100vw">
-            <source type="image/avif" srcset="assets/images/opt/shoreline-960.avif 960w, assets/images/opt/shoreline-1440.avif 1440w, assets/images/opt/shoreline-1920.avif 1920w, assets/images/opt/shoreline-2259.avif 2259w" sizes="100vw">
-            <source type="image/webp" srcset="assets/images/opt/shoreline-960.webp 960w, assets/images/opt/shoreline-1440.webp 1440w, assets/images/opt/shoreline-1920.webp 1920w, assets/images/opt/shoreline-2259.webp 2259w" sizes="100vw">
-            <img src="assets/images/opt/shoreline-1440.webp" alt="Aerial view of a sandy beach and shallow green lake water" width="1440" height="1035" fetchpriority="high" decoding="async">
+            <source type="image/avif" media="(orientation: portrait)" srcset="assets/images/opt/package-a-p-540.avif 540w, assets/images/opt/package-a-p-828.avif 828w, assets/images/opt/package-a-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" srcset="assets/images/opt/package-a-p-540.webp 540w, assets/images/opt/package-a-p-828.webp 828w, assets/images/opt/package-a-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" srcset="assets/images/opt/package-a-960.avif 960w, assets/images/opt/package-a-1440.avif 1440w, assets/images/opt/package-a-1920.avif 1920w, assets/images/opt/package-a-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" srcset="assets/images/opt/package-a-960.webp 960w, assets/images/opt/package-a-1440.webp 1440w, assets/images/opt/package-a-1920.webp 1920w, assets/images/opt/package-a-2560.webp 2560w" sizes="100vw">
+            <img src="assets/images/opt/package-a-1440.webp" alt="Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island" width="1440" height="960" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__slide" data-slide aria-hidden="true">
+          <picture>
+            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/shoreline-p-540.avif 540w, assets/images/opt/shoreline-p-828.avif 828w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/shoreline-p-540.webp 540w, assets/images/opt/shoreline-p-828.webp 828w" sizes="100vw">
+            <source type="image/avif" data-srcset="assets/images/opt/shoreline-960.avif 960w, assets/images/opt/shoreline-1440.avif 1440w, assets/images/opt/shoreline-1920.avif 1920w, assets/images/opt/shoreline-2259.avif 2259w" sizes="100vw">
+            <source type="image/webp" data-srcset="assets/images/opt/shoreline-960.webp 960w, assets/images/opt/shoreline-1440.webp 1440w, assets/images/opt/shoreline-1920.webp 1920w, assets/images/opt/shoreline-2259.webp 2259w" sizes="100vw">
+            <img data-src="assets/images/opt/shoreline-1440.webp" alt="Aerial view of a sandy beach and shallow green lake water" width="1440" height="960" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__slide" data-slide aria-hidden="true">
+          <picture>
+            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/package-c-p-540.avif 540w, assets/images/opt/package-c-p-828.avif 828w, assets/images/opt/package-c-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/package-c-p-540.webp 540w, assets/images/opt/package-c-p-828.webp 828w, assets/images/opt/package-c-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" data-srcset="assets/images/opt/package-c-960.avif 960w, assets/images/opt/package-c-1440.avif 1440w, assets/images/opt/package-c-1920.avif 1920w, assets/images/opt/package-c-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" data-srcset="assets/images/opt/package-c-960.webp 960w, assets/images/opt/package-c-1440.webp 1440w, assets/images/opt/package-c-1920.webp 1920w, assets/images/opt/package-c-2560.webp 2560w" sizes="100vw">
+            <img data-src="assets/images/opt/package-c-1440.webp" alt="Rendering of a South Banks kitchen in Package C finishes, with white cabinets and a window looking out" width="1440" height="960" loading="lazy" decoding="async">
           </picture>
         </div>
         <div class="hero__slide" data-slide aria-hidden="true">
@@ -407,6 +436,15 @@
             <source type="image/avif" data-srcset="assets/images/opt/masterplan-960.avif 960w, assets/images/opt/masterplan-1440.avif 1440w, assets/images/opt/masterplan-1746.avif 1746w" sizes="100vw">
             <source type="image/webp" data-srcset="assets/images/opt/masterplan-960.webp 960w, assets/images/opt/masterplan-1440.webp 1440w, assets/images/opt/masterplan-1746.webp 1746w" sizes="100vw">
             <img data-src="assets/images/opt/masterplan-1440.webp" alt="Aerial rendering of the Lakeview Village waterfront masterplan with the South Banks site marked beside Waterway Common Park" width="1440" height="793" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__slide" data-slide aria-hidden="true">
+          <picture>
+            <source type="image/avif" media="(orientation: portrait)" data-srcset="assets/images/opt/package-b-p-540.avif 540w, assets/images/opt/package-b-p-828.avif 828w, assets/images/opt/package-b-p-1080.avif 1080w" sizes="100vw">
+            <source type="image/webp" media="(orientation: portrait)" data-srcset="assets/images/opt/package-b-p-540.webp 540w, assets/images/opt/package-b-p-828.webp 828w, assets/images/opt/package-b-p-1080.webp 1080w" sizes="100vw">
+            <source type="image/avif" data-srcset="assets/images/opt/package-b-960.avif 960w, assets/images/opt/package-b-1440.avif 1440w, assets/images/opt/package-b-1920.avif 1920w, assets/images/opt/package-b-2560.avif 2560w" sizes="100vw">
+            <source type="image/webp" data-srcset="assets/images/opt/package-b-960.webp 960w, assets/images/opt/package-b-1440.webp 1440w, assets/images/opt/package-b-1920.webp 1920w, assets/images/opt/package-b-2560.webp 2560w" sizes="100vw">
+            <img data-src="assets/images/opt/package-b-1440.webp" alt="Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets" width="1440" height="960" loading="lazy" decoding="async">
           </picture>
         </div>
       <!-- /build:hero -->
@@ -462,12 +500,39 @@
       <div class="wrap gallery__head">
         <div>
           <p class="eyebrow reveal">Renderings</p>
-          <h2 class="h2 reveal" style="margin-bottom:0">The architecture</h2>
+          <h2 class="h2 reveal" style="margin-bottom:0">The homes</h2>
         </div>
         <a class="btn btn--outline-light btn--small reveal" href="#register">Get Phase 2 floor plans</a>
       </div>
       <div class="gallery__track"><!-- build:gallery -->
-          <figure class="gallery__item reveal">
+          <figure class="gallery__item gallery__item--tall reveal">
+            <a href="assets/images/opt/package-a-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island">
+              <picture class="parallax">
+                <source type="image/avif" srcset="assets/images/opt/package-a-g-640.avif 640w, assets/images/opt/package-a-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
+                <img src="assets/images/opt/package-a-g-640.webp" srcset="assets/images/opt/package-a-g-640.webp 640w, assets/images/opt/package-a-g-1280.webp 1280w" sizes="(min-width: 900px) 60vw, 86vw" alt="Rendering of a South Banks kitchen in Package A finishes, with light oak cabinets and an island" width="640" height="800" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <figcaption>Kitchen, Package A</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--tall reveal">
+            <a href="assets/images/opt/package-b-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets">
+              <picture class="parallax">
+                <source type="image/avif" srcset="assets/images/opt/package-b-g-640.avif 640w, assets/images/opt/package-b-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
+                <img src="assets/images/opt/package-b-g-640.webp" srcset="assets/images/opt/package-b-g-640.webp 640w, assets/images/opt/package-b-g-1280.webp 1280w" sizes="(min-width: 900px) 60vw, 86vw" alt="Rendering of a South Banks kitchen in Package B finishes, with dark wood cabinets" width="640" height="800" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <figcaption>Kitchen, Package B</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--tall reveal">
+            <a href="assets/images/opt/package-c-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Rendering of a South Banks kitchen in Package C finishes, with white cabinets and a window looking out">
+              <picture class="parallax">
+                <source type="image/avif" srcset="assets/images/opt/package-c-g-640.avif 640w, assets/images/opt/package-c-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
+                <img src="assets/images/opt/package-c-g-640.webp" srcset="assets/images/opt/package-c-g-640.webp 640w, assets/images/opt/package-c-g-1280.webp 1280w" sizes="(min-width: 900px) 60vw, 86vw" alt="Rendering of a South Banks kitchen in Package C finishes, with white cabinets and a window looking out" width="640" height="800" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <figcaption>Kitchen, Package C</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--wide reveal">
             <a href="assets/images/opt/masterplan-g-1280.webp" class="gallery__link" data-lightbox aria-label="Open larger image: Aerial rendering of the Lakeview Village waterfront masterplan with the South Banks site marked beside Waterway Common Park">
               <picture class="parallax">
                 <source type="image/avif" srcset="assets/images/opt/masterplan-g-640.avif 640w, assets/images/opt/masterplan-g-1280.avif 1280w" sizes="(min-width: 900px) 60vw, 86vw">
@@ -478,6 +543,32 @@
       <!-- /build:gallery -->
       </div>
       <div class="wrap"><p class="source" style="color:rgba(243,239,228,.55)">Renderings are artist's concepts and may differ from the finished homes.</p></div>
+    </section>
+
+    <section class="section section--tint" id="courtyard">
+      <div class="wrap court__grid">
+        <div>
+          <p class="eyebrow reveal">Amenities</p>
+          <h2 class="h2"><span class="reveal-line reveal"><span>The courtyard</span></span></h2>
+          <p class="lede reveal">The South Banks amenity plan puts a landscaped courtyard at the centre of the community, with a lawn, dining area and space for kids to play.</p>
+          <ul class="court__list reveal">
+            <li>Courtyard lawn</li>
+            <li>Covered dining area</li>
+            <li>Bocce ball court</li>
+            <li>Over-sized games</li>
+            <li>Tiered seating and play area</li>
+            <li>Celebration tree</li>
+            <li>Seating area</li>
+            <li>Bicycle spaces</li>
+          </ul>
+        </div>
+        <figure class="court__plan reveal">
+          <picture>
+            <source type="image/avif" srcset="assets/images/opt/amenity-plan-900.avif 900w, assets/images/opt/amenity-plan-1800.avif 1800w" sizes="(min-width: 1200px) 680px, (min-width: 900px) 58vw, 92vw">
+            <img src="assets/images/opt/amenity-plan-900.webp" srcset="assets/images/opt/amenity-plan-900.webp 900w, assets/images/opt/amenity-plan-1800.webp 1800w" sizes="(min-width: 1200px) 680px, (min-width: 900px) 58vw, 92vw" width="900" height="630" loading="lazy" decoding="async" alt="South Banks amenity plan showing the courtyard lawn, covered dining area, bocce ball court, over-sized games, tiered seating and play area, seating area and bicycle spaces">
+          </picture>
+        </figure>
+      </div>
     </section>
 
     <section class="section" id="location">

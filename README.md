@@ -15,14 +15,15 @@ scripts/              image pipeline
 ## Adding the renderings
 
 The hero slideshow and gallery are generated from the files in `assets/images/source/`.
-The script looks for these names (hero order):
+The script looks for the filenames listed in `IMAGES` at the top of
+`scripts/build-images.mjs`. The hero uses the first six that exist, in that order.
+In place now: Package A/B/C kitchens, Shoreline Aerial, Lakeview Village Site Plan,
+Amenity Plan. Still missing (too large to pull from Drive):
 
-1. `South Banks Street View.png`
-2. `South Banks Exterior - Elevation A.png`
-3. `Shoreline Aerial.jpg` (in place)
-4. `South Banks Rooftop Terrace.png`
-5. `Lakeview Village Site Plan.jpg` (in place)
-6. `South Banks Exterior - Elevation C.png`
+- `South Banks Street View.png` (becomes the first hero slide)
+- `South Banks Exterior - Elevation A.png`
+- `South Banks Exterior - Elevation C.png`
+- `South Banks Rooftop Terrace.png`
 
 Drop the originals in, then:
 
