@@ -1,7 +1,19 @@
 // South Banks Phase 2 landing page. No dependencies.
 
-// Paste the Google Apps Script web app URL here (see backend/README.md).
-const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbydptPMzlHUyb4lWSQqN0JDef5jyTLpPGJy1pmYhdDGxsQudKneoY14TzXYvogrI9OmgA/exec';
+// Registrations are emailed by FormSubmit (formsubmit.co), which also sends the auto-reply.
+// The very first submission triggers a one-time "Activate form" email to this address.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/tsechogyal@gmail.com';
+const AUTO_REPLY = [
+  'Thanks for registering for South Banks Phase 2 updates.',
+  '',
+  'Phase 2 pricing, floor plans and the launch date have not been released yet. You will get them by email as soon as they are.',
+  '',
+  'Questions in the meantime? WhatsApp or call 416-451-4099: https://wa.me/14164514099',
+  '',
+  'Tsering Chogyal',
+  'Sales Representative',
+  "Century21 People's Choice Realty Inc. Brokerage",
+].join('\n');
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -248,18 +260,35 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
     button.disabled = true;
     button.textContent = 'Sending…';
-    const data = new URLSearchParams(new FormData(form));
-    data.set('page', location.href.split('?')[0]);
+    // Keys become the labels in the lead email. `email` doubles as the reply-to address.
+    const lead = {
+      Name: f.name.value.trim(),
+      email: f.email.value.trim(),
+      Phone: f.phone.value.trim(),
+      'Interested as': f.intent.value,
+      'Working with a realtor': f.realtor.value,
+      'Ad source': f.source.value,
+      Consent: 'Yes',
+      _subject: `New South Banks Phase 2 registration: ${f.name.value.trim()}`,
+      _template: 'table',
+      _captcha: 'false',
+      _autoresponse: AUTO_REPLY,
+    };
     try {
-      // Apps Script web apps don't send CORS headers, so this is fire-and-forget.
-      await fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data });
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(lead),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || res.status);
       form.hidden = true;
       done.hidden = false;
       done.focus();
     } catch {
       button.disabled = false;
       button.textContent = 'Register for Phase 2 updates';
-      error.textContent = 'That didn’t go through. Check your connection and try again, or message on WhatsApp.';
+      error.textContent = 'That didn’t go through. Please try again, or message on WhatsApp or call 416-451-4099.';
     }
   });
 })();

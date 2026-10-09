@@ -8,7 +8,6 @@ index.html            page + all CSS (inlined so the first paint needs one reque
 assets/js/main.js     slideshow, scroll reveals, form, WhatsApp button (~9 KB, no libraries)
 assets/images/opt/    generated AVIF/WebP files, do not edit by hand
 assets/images/source/ original renderings (input to the image script)
-backend/              Google Apps Script for the registration form
 scripts/              image pipeline
 ```
 
@@ -38,13 +37,15 @@ To change the phone crop of an image, edit its `focus` value in `scripts/build-i
 
 ## Registration form
 
-1. Follow the steps at the top of `backend/apps-script.gs`. Lead alerts go to tsechogyal@gmail.com.
-2. Paste the web app URL into `FORM_ENDPOINT` in `assets/js/main.js`.
-3. Submit a test registration and check the row lands in the sheet and the alert email arrives.
+Each registration is emailed to tsechogyal@gmail.com through FormSubmit (formsubmit.co, free,
+no account). FormSubmit also sends the person an automatic thank-you email; the text is
+`AUTO_REPLY` in `assets/js/main.js`. Nothing is stored anywhere else.
 
-The form is connected to the deployed web app. To test the sheet + email without the site, run `testLead` in the Apps Script editor.
+One-time activation: the first registration after the site goes live does not arrive as a lead.
+FormSubmit sends an "Activate form" email to tsechogyal@gmail.com instead. Click the button in
+it, then submit a test registration again to confirm leads and auto-replies arrive.
 
-UTM parameters and `fbclid` from ad links are saved with each lead in the Source column.
+UTM parameters and `fbclid` from ad links are included in each lead email as "Ad source".
 
 ## Before going live
 
