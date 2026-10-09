@@ -55,6 +55,7 @@ const PLAIN = [
   // Azure and Breeze come from 1600px screenshots of their PDFs.
   { key: 'plan-azure', file: 'Plan - azure.png', widths: [900, 1600] },
   { key: 'plan-breeze', file: 'Plan - breeze.png', widths: [900, 1600] },
+  { key: 'plan-drift', file: 'Plan - drift-end.png', widths: [900, 1800] },
 ];
 
 const HERO_LANDSCAPE = [960, 1440, 1920, 2560];
