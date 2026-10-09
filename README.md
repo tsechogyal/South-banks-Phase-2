@@ -37,14 +37,14 @@ Each registration is emailed to tsechogyal@gmail.com through FormSubmit (formsub
 no account). FormSubmit also sends the person an automatic thank-you email; the text is
 `AUTO_REPLY` in `assets/js/main.js`. Nothing is stored anywhere else.
 
-One-time activation: the first registration after the site goes live does not arrive as a lead.
-FormSubmit sends an "Activate form" email to tsechogyal@gmail.com instead. Click the button in
-it, then submit a test registration again to confirm leads and auto-replies arrive.
+The form was activated on Oct 9, 2026 for https://southbanks-phase2.pages.dev and posts to
+FormSubmit's alias for the address. Moving the site to a new domain triggers a new one-time
+activation email.
 
 UTM parameters and `fbclid` from ad links are included in each lead email as "Ad source".
 
-## Before going live
+## Live site
 
-- Once the domain is known, add `<link rel="canonical">`, make the `og:image` URL absolute,
-  and add `robots.txt` + `sitemap.xml`.
-- Serve with long cache headers on `assets/` (files are content-stable) and gzip/brotli on HTML/JS.
+https://southbanks-phase2.pages.dev (Cloudflare Pages, uploaded by hand). To update it, upload
+the site folder again as a new deployment of the `southbanks-phase2` project. If the domain
+changes, update the canonical/og URLs in `index.html`, `robots.txt` and `sitemap.xml`.

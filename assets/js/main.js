@@ -1,8 +1,9 @@
 // South Banks Phase 2 landing page. No dependencies.
 
 // Registrations are emailed by FormSubmit (formsubmit.co), which also sends the auto-reply.
-// The very first submission triggers a one-time "Activate form" email to this address.
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/tsechogyal@gmail.com';
+// The random string is FormSubmit's alias for tsechogyal@gmail.com (form activated Oct 9, 2026),
+// so the address itself isn't exposed in the page source.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/07b9d4abadef0d92c1e3c941a7d3c392';
 const AUTO_REPLY = [
   'Thanks for registering for South Banks Phase 2 updates.',
   '',

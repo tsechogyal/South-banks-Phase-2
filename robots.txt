@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://southbanks-phase2.pages.dev/sitemap.xml
