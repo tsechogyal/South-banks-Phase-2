@@ -67,3 +67,11 @@ function getSheet() {
 function ok() {
   return ContentService.createTextOutput('ok');
 }
+
+// Run this from the Apps Script editor to check the sheet row and the email alert.
+function testLead() {
+  doPost({ parameter: {
+    name: 'Test Lead', email: 'test' + Date.now() + '@example.com', phone: '416-555-0100',
+    intent: 'Home to live in', realtor: 'No', consent: 'yes', source: 'manual test', page: 'Apps Script editor',
+  } });
+}

@@ -42,7 +42,7 @@ To change the phone crop of an image, edit its `focus` value in `scripts/build-i
 2. Paste the web app URL into `FORM_ENDPOINT` in `assets/js/main.js`.
 3. Submit a test registration and check the row lands in the sheet and the alert email arrives.
 
-Until the URL is set, the form asks visitors to use WhatsApp or call instead.
+The form is connected to the deployed web app. To test the sheet + email without the site, run `testLead` in the Apps Script editor.
 
 UTM parameters and `fbclid` from ad links are saved with each lead in the Source column.
 

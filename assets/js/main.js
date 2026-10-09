@@ -1,7 +1,7 @@
 // South Banks Phase 2 landing page. No dependencies.
 
 // Paste the Google Apps Script web app URL here (see backend/README.md).
-const FORM_ENDPOINT = '';
+const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbydptPMzlHUyb4lWSQqN0JDef5jyTLpPGJy1pmYhdDGxsQudKneoY14TzXYvogrI9OmgA/exec';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const $ = (sel, root = document) => root.querySelector(sel);
