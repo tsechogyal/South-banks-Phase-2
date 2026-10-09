@@ -16,13 +16,9 @@ scripts/              image pipeline
 The hero slideshow and gallery are generated from the files in `assets/images/source/`.
 The script looks for the filenames listed in `IMAGES` at the top of
 `scripts/build-images.mjs`. The hero uses the first six that exist, in that order.
-In place now: Package A/B/C kitchens, Shoreline Aerial, Lakeview Village Site Plan,
-Amenity Plan. Still missing (too large to pull from Drive):
-
-- `South Banks Street View.png` (becomes the first hero slide)
-- `South Banks Exterior - Elevation A.png`
-- `South Banks Exterior - Elevation C.png`
-- `South Banks Rooftop Terrace.png`
+In place now: Elevations A and C (from the floor plan PDF covers), Package A/B/C kitchens,
+Shoreline Aerial, Lakeview Village Site Plan, Amenity Plan, and plan drawings for all six
+models. Not yet added: `South Banks Street View.png` and `South Banks Rooftop Terrace.png`.
 
 Drop the originals in, then:
 
