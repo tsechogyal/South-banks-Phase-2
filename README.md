@@ -48,7 +48,6 @@ UTM parameters and `fbclid` from ad links are saved with each lead in the Source
 
 ## Before going live
 
-- Add the brokerage name and its required disclaimer to the footer.
 - Once the domain is known, add `<link rel="canonical">`, make the `og:image` URL absolute,
   and add `robots.txt` + `sitemap.xml`.
 - Serve with long cache headers on `assets/` (files are content-stable) and gzip/brotli on HTML/JS.
