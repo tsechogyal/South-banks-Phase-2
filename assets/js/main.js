@@ -1,20 +1,17 @@
 // South Banks Phase 2 landing page. No dependencies.
 
-// Registrations are emailed by FormSubmit (formsubmit.co), which also sends the auto-reply.
-// The random string is FormSubmit's alias for the lead inbox (form activated Oct 9, 2026),
-// so the address itself isn't exposed in the page source.
+// Lead details go to the inbox through FormSubmit (formsubmit.co). The random string is
+// FormSubmit's alias for the lead inbox (form activated Oct 9, 2026), so the address itself
+// isn't exposed in the page source.
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/07b9d4abadef0d92c1e3c941a7d3c392';
-const AUTO_REPLY = [
-  'Thanks for registering for South Banks Phase 2 updates.',
-  '',
-  'Phase 2 pricing, floor plans and the launch date have not been released yet. You will get them by email as soon as they are.',
-  '',
-  'Questions in the meantime? WhatsApp or call 416-451-4099: https://wa.me/14164514099',
-  '',
-  'Tsering Chogyal',
-  'Sales Representative',
-  "Century21 People's Choice Realty Inc. Brokerage",
-].join('\n');
+
+// The thank-you email to the registrant is sent from Tsering's Gmail through EmailJS.
+// These IDs are public by design; the email text lives in the EmailJS template.
+const EMAILJS = {
+  service: 'SERVICE_ID',
+  template: 'template_bwzms3u',
+  publicKey: 'PUBLIC_KEY',
+};
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -216,6 +213,23 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
 })();
 
+/* ---------- Thank-you email (EmailJS REST API, no SDK) ---------- */
+// Best effort: the lead is already captured, so a failure here never blocks the form.
+function sendThankYou(lead) {
+  if (EMAILJS.service.startsWith('SERVICE') || EMAILJS.publicKey.startsWith('PUBLIC')) return;
+  fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      service_id: EMAILJS.service,
+      template_id: EMAILJS.template,
+      user_id: EMAILJS.publicKey,
+      template_params: { name: lead.Name.split(' ')[0], full_name: lead.Name, email: lead.email, budget: lead.Budget },
+    }),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 /* ---------- Registration form ---------- */
 (() => {
   const form = $('#lead-form');
@@ -275,7 +289,6 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
       _subject: `New South Banks Phase 2 registration: ${f.name.value.trim()}`,
       _template: 'table',
       _captcha: 'false',
-      _autoresponse: AUTO_REPLY,
     };
     try {
       const res = await fetch(FORM_ENDPOINT, {
@@ -285,6 +298,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || res.status);
+      sendThankYou(lead);
       form.hidden = true;
       done.hidden = false;
       done.focus();

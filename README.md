@@ -34,8 +34,10 @@ To change the phone crop of an image, edit its `focus` value in `scripts/build-i
 ## Registration form
 
 Each registration is emailed to tsechogyal@gmail.com through FormSubmit (formsubmit.co, free,
-no account). FormSubmit also sends the person an automatic thank-you email; the text is
-`AUTO_REPLY` in `assets/js/main.js`. Nothing is stored anywhere else.
+no account). The registrant's thank-you email is sent from that Gmail account through EmailJS
+(template `template_bwzms3u`; its wording is edited in the EmailJS dashboard). Fill in the
+`EMAILJS` service ID and public key in `assets/js/main.js`; until then no thank-you is sent.
+Nothing is stored anywhere else.
 
 The form was activated on Oct 9, 2026 for https://southbanks-phase2.pages.dev and posts to
 FormSubmit's alias for the address. Moving the site to a new domain triggers a new one-time
