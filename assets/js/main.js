@@ -10,7 +10,7 @@ const FORM_ENDPOINT = 'https://formsubmit.co/ajax/07b9d4abadef0d92c1e3c941a7d3c3
 const EMAILJS = {
   service: 'service_bcxucst',
   template: 'template_bwzms3u',
-  publicKey: 'PUBLIC_KEY',
+  publicKey: '-Duincp3H009Y5r66',
 };
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

@@ -35,8 +35,8 @@ To change the phone crop of an image, edit its `focus` value in `scripts/build-i
 
 Each registration is emailed to tsechogyal@gmail.com through FormSubmit (formsubmit.co, free,
 no account). The registrant's thank-you email is sent from that Gmail account through EmailJS
-(template `template_bwzms3u`; its wording is edited in the EmailJS dashboard). Fill in the
-`EMAILJS` service ID and public key in `assets/js/main.js`; until then no thank-you is sent.
+(service `service_bcxucst`, template `template_bwzms3u`; edit the wording in the EmailJS
+dashboard, no site change needed). The free EmailJS plan allows 200 emails a month.
 Nothing is stored anywhere else.
 
 The form was activated on Oct 9, 2026 for https://southbanks-phase2.pages.dev and posts to
