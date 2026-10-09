@@ -8,7 +8,7 @@ const FORM_ENDPOINT = 'https://formsubmit.co/ajax/07b9d4abadef0d92c1e3c941a7d3c3
 // The thank-you email to the registrant is sent from Tsering's Gmail through EmailJS.
 // These IDs are public by design; the email text lives in the EmailJS template.
 const EMAILJS = {
-  service: 'SERVICE_ID',
+  service: 'service_bcxucst',
   template: 'template_bwzms3u',
   publicKey: 'PUBLIC_KEY',
 };
