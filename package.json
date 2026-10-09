@@ -1,0 +1,13 @@
+{
+  "name": "south-banks-phase-2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "images": "node scripts/build-images.mjs",
+    "serve": "npx --yes serve -l 4173 ."
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4",
+    "@fontsource/cormorant-garamond": "^5.2.6"
+  }
+}
